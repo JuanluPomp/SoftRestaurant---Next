@@ -1,4 +1,4 @@
-import { formatCurrency } from '@/src/utils'
+import { formatCurrency, getCorrectPathname } from '@/src/utils'
 import { Product } from '@prisma/client'
 import Image from 'next/image'
 import React from 'react'
@@ -9,13 +9,15 @@ type ProductCardProps = {
 }
 
 export default function ProductCard({product}: ProductCardProps) {
+    
+const pathname = getCorrectPathname(product.image)
   return (
-    <div className=' border border-slate-300 bg-white shadow-xl'>
+    <div className=' container mx-auto border border-slate-300 bg-white shadow-xl'>
         <Image
             className=' p-2'
             width={400}
             height={500}
-            src={`/products/${product.image}.jpg`}
+            src={pathname}
             alt={`${product.name}`}
         />
         <div className=' p-5'>

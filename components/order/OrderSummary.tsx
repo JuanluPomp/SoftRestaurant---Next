@@ -7,24 +7,40 @@ import { formatCurrency } from '@/src/utils'
 import { OrderSchema } from '@/src/schema'
 import { toast } from 'react-toastify'
 import { Result } from 'postcss'
+import { createOrder } from '@/actions/order/create-order-actions'
+import { error } from 'console'
 
 export default function OrderSummary() {
   const order = useStore((state) => state.order)
   const total = useMemo(() => order.reduce((total, item) => total + item.subTotal, 0), [order])
 
-  const handleCreateOrder = (formData: FormData)=> {
+  const clearOrder = useStore(state => state.clearOrder)
+
+  const handleCreateOrder = async (formData: FormData)=> {
       const data = {
-        name: formData.get('name')
+        name: formData.get('name'),
+        total,
+        order
       }
       const result = OrderSchema.safeParse(data)
+      console.log(result)
       if(!result.success){
           result.error.issues.forEach(issue => {
               toast.error(issue.message)
           })
-          
+     
           return
       }
-      toast.success('Orden guardada')
+      const response = await createOrder(data)
+      if(response?.errors){
+        response.errors.forEach(issue => {
+            toast.error(issue.message)
+        });
+      }
+
+      toast.success('orden registrada correctamente')
+
+      clearOrder()
   }
 
   return (
