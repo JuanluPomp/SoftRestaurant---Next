@@ -1,6 +1,5 @@
 "use server"
 
-import { products } from "@/prisma/data/products"
 import { prisma } from "@/src/lib/prisma"
 
 

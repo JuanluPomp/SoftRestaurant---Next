@@ -3,9 +3,9 @@ import { CldUploadWidget } from 'next-cloudinary'
 import { TbPhotoPlus } from 'react-icons/tb'
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { object } from 'zod'
+import { getCorrectPathname } from '@/src/utils'
 
-export default function ImageUpload() {
+export default function ImageUpload({image}: {image: string | undefined}) {
     const [imageUrl, setImageUrl] = useState('')
 
   return (
@@ -13,8 +13,9 @@ export default function ImageUpload() {
         onSuccess={(result, {widget}) => {
             if(result.event === 'success'){
                 widget.close()
-                //@ts-ignore
+                // @ts-expect-error: fix de tipos para secure_url
                 setImageUrl(result.info.secure_url)
+
             }
         }}
         uploadPreset='ml_default'
@@ -50,11 +51,22 @@ export default function ImageUpload() {
                     </div>
                     
                 </div>
-
+                {!imageUrl && image && (
+                    <div className=' space-y-2'>
+                        <label>Imagen actual:</label>
+                        <div className=' relative w-64 h-64'>
+                            <Image
+                                fill
+                                src={getCorrectPathname(image!)}
+                                alt='Imagen producto'
+                            />
+                        </div>
+                    </div>
+                )}
                 <input 
                     type="hidden"
                     name='image'
-                    value={imageUrl}
+                    defaultValue={imageUrl ? imageUrl : image}
                 />
             </>
         )}

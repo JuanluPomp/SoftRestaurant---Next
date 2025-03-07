@@ -14,7 +14,7 @@ const pathname = getCorrectPathname(product.image)
   return (
     <div className=' container mx-auto border border-slate-300 bg-white shadow-xl'>
         <Image
-            className=' p-2'
+            className=' p-4 w-full'
             width={400}
             height={500}
             src={pathname}

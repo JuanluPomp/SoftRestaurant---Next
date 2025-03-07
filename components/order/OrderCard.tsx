@@ -1,7 +1,6 @@
 
 import { OrderWithProducts } from '@/src/types'
 import { formatCurrency } from '@/src/utils'
-import { Order } from '@prisma/client'
 import { completeOrder } from '@/actions/order/complete-order-action'
 
 type OrderCardProps = {
@@ -9,7 +8,7 @@ type OrderCardProps = {
 }
 
 
-export default async function OrderCard({ order }: OrderCardProps) {
+export default function OrderCard({ order }: OrderCardProps) {
 
     return (
         <section

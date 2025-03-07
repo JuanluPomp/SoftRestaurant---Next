@@ -1,5 +1,4 @@
 import { ProductsWithCategory } from "@/actions/products/get-products"
-import { Product } from "@prisma/client"
 import Link from "next/link"
 
 type ProductTableProps = {
@@ -43,7 +42,7 @@ export default function ProductsTable({products}: ProductTableProps) {
                                     </td>
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                         <Link
-                                            href={`admin/products/${product.id}/edit`}
+                                            href={`/admin/products/${product.id}/edit`}
                                             className=" text-indigo-600 hover:text-indigo-800 text-xl font-bold "
                                         >Editar <span className=" sr-only">, {product.name}</span></Link>
                                     </td>
