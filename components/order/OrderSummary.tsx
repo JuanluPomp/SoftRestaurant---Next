@@ -6,9 +6,7 @@ import ProductDetails from './ProductDetails'
 import { formatCurrency } from '@/src/utils'
 import { OrderSchema } from '@/src/schema'
 import { toast } from 'react-toastify'
-import { Result } from 'postcss'
 import { createOrder } from '@/actions/order/create-order-actions'
-import { error } from 'console'
 
 export default function OrderSummary() {
   const order = useStore((state) => state.order)

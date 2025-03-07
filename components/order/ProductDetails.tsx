@@ -1,5 +1,5 @@
 "use client"
-import { products } from '@/prisma/data/products'
+
 import { useStore } from '@/src/store'
 import { OrderItem } from '@/src/types'
 import { formatCurrency } from '@/src/utils'

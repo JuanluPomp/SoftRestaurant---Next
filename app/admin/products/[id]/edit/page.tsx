@@ -6,7 +6,7 @@ import { prisma } from '@/src/lib/prisma'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-export async function getProductById(id: number){
+async function getProductById(id: number){
         const product = await prisma.product.findUnique({where:{id}})
         console.log(product)
         if(!product){
@@ -15,7 +15,11 @@ export async function getProductById(id: number){
         return product
 }
 
-export default async function EditProductsPage({params} : {params: {id: string}} ) {
+type PageProps = {
+    params: {id: string}
+}
+export default async function EditProductsPage({params} :
+PageProps) {
     const param = await params
     const product = await getProductById(+param.id)
     console.log(product)

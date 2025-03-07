@@ -16,8 +16,8 @@ export const useStore = create<Store>((set, get) => ({
     order: [],
     addToOrder: (product) => {
         let order: OrderItem[] = []
-        const { image, categoryId, ...data } = product
-
+        
+        
         if (get().order.find(item => item.id === product.id)) {
             order = (get().order.map(item => item.id === product.id ? {
                     ...item,
@@ -26,7 +26,7 @@ export const useStore = create<Store>((set, get) => ({
                 }: item))
         } else {
             order = [...get().order, {
-                ...data,
+                ...product,
                 quantity: 1,
                 subTotal: 1 * product.price
             }]

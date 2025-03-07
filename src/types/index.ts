@@ -1,4 +1,4 @@
-import { products } from "@/prisma/data/products"
+
 import { Order, OrderProducts, Product } from "@prisma/client"
 import { z } from "zod"
 
